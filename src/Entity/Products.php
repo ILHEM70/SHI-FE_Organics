@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,20 @@ class Products
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    #[ORM\Column]
+    private ?int $stocks = null;
+
+    /**
+     * @var Collection<int, capacity>
+     */
+    #[ORM\ManyToMany(targetEntity: capacity::class, inversedBy: 'products')]
+    private Collection $capacity;
+
+    public function __construct()
+    {
+        $this->capacity = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +91,42 @@ class Products
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getStocks(): ?int
+    {
+        return $this->stocks;
+    }
+
+    public function setStocks(int $stocks): static
+    {
+        $this->stocks = $stocks;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, capacity>
+     */
+    public function getCapacity(): Collection
+    {
+        return $this->capacity;
+    }
+
+    public function addCapacity(capacity $capacity): static
+    {
+        if (!$this->capacity->contains($capacity)) {
+            $this->capacity->add($capacity);
+        }
+
+        return $this;
+    }
+
+    public function removeCapacity(capacity $capacity): static
+    {
+        $this->capacity->removeElement($capacity);
 
         return $this;
     }
