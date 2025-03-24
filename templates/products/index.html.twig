@@ -1,24 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products
+{% block title %}Produits
 {% endblock %}
 
 {% block body %}
 	<div class="product-container">
-		{% for product in produits %}
-			<div class="product-item">
-				<div class="product-image">
-					<img src="{{asset('assets/images/' ~ product.image)}}" alt="{{product.name}}">
+		{% if produits is not empty %}
+			{% for product in produits %}
+				<div class="product-item">
+					<div class="product-image">
+						<img src="{{ asset('assets/images/' ~ product.image) }}" alt="{{ product.name }}">
+					</div>
+					<div class="product-details">
+						<h2>{{ product.name }}</h2>
+						<p>{{ product.description }}</p>
+						<h3 class="product-price">Prix :
+							{{ product.price }}€</h3>
+
+						<!-- Bouton "Voir Détails" -->
+						<a href="{{ path('product_details', {'id': product.id}) }}" class="btn btn-primary">Voir Détails</a>
+
+						<!-- Bouton "Ajouter au panier" -->
+						<form action="{{ path('app_cart', {'id': product.id}) }}" method="post" style="display:inline;">
+							<button type="submit" class="btn btn-success">Ajouter au panier</button>
+						</form>
+					</div>
 				</div>
-				<div class="product-details">
-					<h2>{{product.name}}</h2>
-					<p>{{product.description}}</p>
-					<h3 class="product-price">Price :
-						{{product.price}}€</h3>
-				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		{% else %}
+			<p>Aucun produit disponible pour le moment.</p>
+		{% endif %}
 	</div>
-
-
 {% endblock %}
+
+

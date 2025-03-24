@@ -21,7 +21,7 @@ class Capacity
     /**
      * @var Collection<int, Products>
      */
-    #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'capacity')]
+    #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'Capacity')]
     private Collection $products;
 
     public function __construct()

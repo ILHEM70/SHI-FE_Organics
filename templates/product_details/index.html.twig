@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DetailsRobeController!
+{% endblock %}
+
+{% block body %}
+
+	<div id="custom-dialog" class="hidden">
+		<div class="dialog-content">
+			<p id="dialog-message">Message ici</p>
+			<button id="dialog-ok">OK</button>
+		</div>
+	</div>
+
+	<div class="detailsProduit">
+
+		{% if image|length > 0 %}
+			<div id="gallery" class="image-container">
+				<a id="lien_img" href="{{ asset('assets/images/' ~ image) }}" data-fancybox="gallery">
+					<img src="{{ asset('assets/images/' ~ image) }}" id="image_product" alt="Imag description" style="cursor: pointer;">
+				</a>
+			</div>
+
+		{% endif %}
+
+
+		<div class="p">
+			<h2 id="titre_Product">{{ product.name }}</h2>
+			<p>{{ product.description }}</p>
+			<p class="price">Prix :
+				{{ product.price }}€</p>
+		
+			</select>
+	
+{# 
+			<button class="btn btn-success" id="bouton_panier" onclick="addToCart({{product.id}})" data-url="{{ path('app_cart') }}">Ajouter au panier</button>
+			<p id="success_add"></p> #}
+			{# <div class="avis_div">
+				{% if app.user%}
+					<!-- Ajouter un bouton pour permettre d'ajouter un avis -->
+					{% if achat == true %}
+						<a href="{{ path('ajouter_avis', {'idProduit': product.id }) }}" class="btn btn-primary mt-3">Ajouter un avis</a>
+					{% endif %}
+					<a href="{{ path('app_avis', {'idProduit': product.id }) }}" class="btn btn-primary mt-3">Voir les avis</a>
+				{% else %}
+					<a href="{{ path('app_avis', {'idProduit': product.id }) }}" class="btn btn-primary mt-3">Voir les avis</a>
+				{% endif %}
+			</div> #}
+		</div>
+
+
+	</div>
+
+{% endblock %}
+

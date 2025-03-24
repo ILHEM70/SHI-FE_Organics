@@ -34,12 +34,19 @@ class Products
     /**
      * @var Collection<int, capacity>
      */
-    #[ORM\ManyToMany(targetEntity: capacity::class, inversedBy: 'products')]
+    #[ORM\ManyToMany(targetEntity: Capacity::class, inversedBy: 'Products')]
     private Collection $capacity;
+
+    /**
+     * @var Collection<int, Avis>
+     */
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Products')]
+    private Collection $avis;
 
     public function __construct()
     {
         $this->capacity = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -127,6 +134,36 @@ class Products
     public function removeCapacity(capacity $capacity): static
     {
         $this->capacity->removeElement($capacity);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProducts() === $this) {
+                $avi->setProducts(null);
+            }
+        }
 
         return $this;
     }
