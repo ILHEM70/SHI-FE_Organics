@@ -2,62 +2,19 @@
 
 {% block title %}Votre Panier
 {% endblock %}
-
 {% block body %}
+
 	<div>
-		<div
-			class="cart-container" id="cart-container" role="region" aria-labelledby="cart-title">
-			{# role="region" et aria-labelledby="cart-title" : Ces attributs aident à identifier la section du panier et à la relier à son titre. #}
-
-			<h2 class="cart-title" id="cart-title">Votre Panier</h2>
-			{% if items is empty %}
-				<p class="cart-empty" aria-live="polite">Votre panier est vide.</p>
-			{% else %}
-				<ul class="cart-items" data-url="{{ path('cart_remove') }}" id="data" role="list">
-					{% for item in panier %}
-						<li
-							class="cart-item" data-id-supp="{{ item.product.id }}" data-prix="{{ item.product.prix }}" role="listitem">
-							{# role="list" et role="listitem" : Ces rôles indiquent que les éléments sont une liste et des éléments de liste, ce qui est utile pour les lecteurs d'écran. #}
-
-							<div class="div-img-cart" role="img" aria-label="Image du produit {{ item.product.nomDuProduit }}">
-
-								{% if item.image is not empty %}
-									<a href="{{ path('app_details_robe', {'id': item.produit.id}) }}" aria-label="Détails du produit {{ item.product.nomDuProduit }}">
-
-										<img src="{{ asset('assets/images/' ~ item.image) }}" id="image_robe" alt="{{ item.product.nomDuProduct }}" aria-hidden="true">
-									</a>
-								{% else %}
-									<a href="{{ path('app_details_robe') }}" aria-label="Détails du produit {{ item.product.nomDuProduit }}">
-										<img src="{{ asset('assets/images/default.jpg', {'id': item.product.id}) }}" id="image_robe" alt="Image par défaut" aria-hidden="true">
-
-									</a>
-								{% endif %}
-
-							</div>
-							<span class="item-name" aria-label="Nom du produit">{{ item.product.nomDuProduit }}</span>
-							<span class="item-details">
-								<span class="item-quantity" aria-label="Quantité">{{ item.quantity }}
-									x</span>
-								<span class="item-price" aria-label="Prix unitaire">{{ item.product.prix }}
-									€</span>
-					
-							<button class="btn btn-danger btn-sm remove-btn" onclick="removeFromCart(event, {{ item.produit.id }}, '{{ item.couleur }}', '{{ item.taille }}')" aria-label="Supprimer {{ item.produit.nomDuProduit }} du panier">
-								Supprimer
-							</button>
-						</li>
-					{% endfor %}
-				</ul>
-				<div class="cart-summary" role="region" aria-labelledby="cart-summary-title">
-					<h3 id="cart-summary-title" class="visually-hidden">Résumé du panier</h3>
-					<p class="cart-total" aria-live="polite">Total :
-						{# aria-live="polite" : Cet attribut indique que les changements dans le contenu (comme le message "Votre panier est vide" ou le total) doivent être annoncés par les lecteurs d'écran. #}
-
-						<span id="total_panier">{{ total }}</span>
-						€</p>
-					<a href="{{ path('app_adress') }}" class="btn btn-primary checkout-btn" aria-label="Passer à la caisse">Passer à la caisse</a>
-				</div>
-			{% endif %}
-		</div>
+		<h1>Votre Panier</h1>
 	</div>
-{% endblock %}
+	<div>
+		{% for key in items %}
+			<img src="{{asset('assets/images/'~ key.image)}}" alt="{{key.name}}">
+			<h2>{{key.name}}</h2>
+			<p>{{key.description}}</p>
+			{{key.price}} €
+		{% endfor %}
 
+	</div>
+
+{% endblock body %}

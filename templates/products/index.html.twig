@@ -21,9 +21,9 @@
 						<a href="{{ path('product_details', {'id': product.id}) }}" class="btn btn-primary">Voir Détails</a>
 
 						<!-- Bouton "Ajouter au panier" -->
-						<form action="{{ path('app_cart', {'id': product.id}) }}" method="post" style="display:inline;">
-							<button type="submit" class="btn btn-success">Ajouter au panier</button>
-						</form>
+
+						<button type="button" class="btn btn-success add_cart" data-id={{product.id}}>Ajouter au panier</button>
+
 					</div>
 				</div>
 			{% endfor %}
@@ -32,5 +32,3 @@
 		{% endif %}
 	</div>
 {% endblock %}
-
-
