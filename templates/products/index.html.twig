@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+<section class="main-section">
 	<div class="product-container">
 		{% if produits is not empty %}
 			{% for product in produits %}
@@ -31,4 +32,5 @@
 			<p>Aucun produit disponible pour le moment.</p>
 		{% endif %}
 	</div>
+</section>
 {% endblock %}

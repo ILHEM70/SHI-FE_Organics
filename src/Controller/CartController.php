@@ -13,14 +13,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CartController extends AbstractController
 {
- 
+
 
     #[Route('/cart', name: 'app_cart')]
     public function index(SessionInterface $session, ProductsRepository $productsRepository): Response
     {
         $panier = $session->get('panier', []);
         $products = [];
-        foreach($panier as $key => $value){
+        foreach ($panier as $key => $value) {
             $products[$key] = $productsRepository->find($key);
         }
 
@@ -47,6 +47,9 @@ class CartController extends AbstractController
 
         $session->set('panier', $panier);
 
-        return new JsonResponse(['message' => "Produit ajouté au panier"]);
+        $nb = count($panier);
+        $session->set('nb', $nb);
+
+        return new JsonResponse(['message' => "Produit ajouté au panier", 'nb' => $nb]);
     }
 }

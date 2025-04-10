@@ -1,17 +1,38 @@
-{% block title %}
-{% endblock %}
-
 {% block body %}
-	<footer class="bg-dark text-white text-center py-4">
-		<p>&copy; 2025 SHI-FE Organics. Tous droits réservés.</p>
-		<p>
-			<a href="{{ path('app_cgv') }}" class="text-white">CGV</a>
-			|
-			<a href="{{ path('app_about_us') }}" class="text-white">À propos de nous</a>
-			|
-			<a href="{{ path('app_contact') }}" class="text-white">Contactez nous</a>
-		</p>
-	</footer>
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="{{ path('app_about_us') }}">Qui sommes-nous</a></li>
+                <li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+                <li><a href="{{ path('app_cgv') }}">CGV</a></li>
+            </ul>
+
+            <ul class="footer-socials">
+                <li>
+                    <a href="#" title="Instagram" target="_blank" rel="noopener noreferrer">
+                        <img src="/assets/images/instagram.png" alt="Instagram">
+                        <span>Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="Facebook">
+                        <img src="/assets/images/facebook.png" alt="Facebook">
+                        <span>Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="YouTube">
+                        <img src="/assets/images/youtube.png" alt="YouTube">
+                        <span>YouTube</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="TikTok">
+                        <img src="/assets/images/tiktok.png" alt="TikTok">
+                        <span>TikTok</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 {% endblock %}
-
-

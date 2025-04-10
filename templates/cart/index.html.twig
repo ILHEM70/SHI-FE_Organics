@@ -3,18 +3,26 @@
 {% block title %}Votre Panier
 {% endblock %}
 {% block body %}
+<section class="main-section">
 
+<div>
+	{% if items is empty%}
+	
 	<div>
-		<h1>Votre Panier</h1>
+	<h2> Votre panier est malheureusement vide ...</h2>
+	<p> Pourquoi ne pas aller le remplir ? <a href="{{path('app_products')}}"> Suivez-nous !! </a></p>
 	</div>
+{% endif %}
 	<div>
 		{% for key in items %}
 			<img src="{{asset('assets/images/'~ key.image)}}" alt="{{key.name}}">
 			<h2>{{key.name}}</h2>
-			<p>{{key.description}}</p>
-			{{key.price}} €
+			<p class="description">{{key.description}}</p>
+			<p class="price">Price : {{key.price}} €</p>
 		{% endfor %}
 
 	</div>
+</div>
+</section>
 
 {% endblock body %}

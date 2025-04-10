@@ -25,15 +25,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
@@ -60,7 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: ContactUs::class, mappedBy: 'user')]
     private Collection $contactUs;
-    
 
     public function __construct()
     {
@@ -85,33 +78,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -119,9 +98,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -134,13 +110,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // Ne rien faire ici pour le moment
     }
 
     public function getFirstname(): ?string
@@ -191,9 +163,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Avis>
-     */
     public function getAvis(): Collection
     {
         return $this->avis;
@@ -212,7 +181,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
             if ($avi->getUser() === $this) {
                 $avi->setUser(null);
             }
@@ -221,9 +189,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, ContactUs>
-     */
     public function getContactUs(): Collection
     {
         return $this->contactUs;
@@ -242,7 +207,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeContactUs(ContactUs $contactUs): static
     {
         if ($this->contactUs->removeElement($contactUs)) {
-            // set the owning side to null (unless already changed)
             if ($contactUs->getUser() === $this) {
                 $contactUs->setUser(null);
             }
@@ -250,6 +214,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
 }

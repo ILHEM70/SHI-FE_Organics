@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DetailsRobeController!
+{% block title %}
 {% endblock %}
 
 {% block body %}
-
+<section class="main-section">
 	<div id="custom-dialog" class="hidden">
 		<div class="dialog-content">
 			<p id="dialog-message">Message ici</p>
@@ -27,14 +27,14 @@
 		<div class="p">
 			<h2 id="titre_Product">{{ product.name }}</h2>
 			<p>{{ product.description }}</p>
-			<p class="price">Prix :
+			<p class="price">Price :
 				{{ product.price }}€</p>
 		
 			</select>
 	
-{# 
+
 			<button class="btn btn-success" id="bouton_panier" onclick="addToCart({{product.id}})" data-url="{{ path('app_cart') }}">Ajouter au panier</button>
-			<p id="success_add"></p> #}
+			<p id="success_add"></p>
 			{# <div class="avis_div">
 				{% if app.user%}
 					<!-- Ajouter un bouton pour permettre d'ajouter un avis -->
@@ -45,11 +45,11 @@
 				{% else %}
 					<a href="{{ path('app_avis', {'idProduit': product.id }) }}" class="btn btn-primary mt-3">Voir les avis</a>
 				{% endif %}
-			</div> #}
-		</div>
+			</div>#}
+		</div> 
 
 
 	</div>
-
+</section>
 {% endblock %}
 
